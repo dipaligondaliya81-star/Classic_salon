@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Contact.css";
+import { API_BASE_URL, getWhatsAppUrl } from "../apiConfig";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -22,7 +23,7 @@ export default function Contact() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleBooking = async (e) => {
+  const handleBooking = (e) => {
     e.preventDefault();
     if (!formData.firstName || !formData.phone || !formData.date) {
       alert("Please provide the essential details (Name, Phone, and Date) for our records.");
@@ -31,38 +32,43 @@ export default function Contact() {
 
     setIsSubmitting(true);
 
+    // 1. Prepare the Message
+    const msg =
+      `🌸 *NEW BOOKING — CLASSIC SALON* 🌸\n\n` +
+      `👤 Name: ${formData.firstName} ${formData.lastName}\n` +
+      `📞 Phone: ${formData.phone}\n` +
+      `📅 Date: ${formData.date}\n` +
+      `🕐 Time: ${formData.timeSlot}\n` +
+      `💄 Service: ${formData.service}\n` +
+      `✂️ Stylist: ${formData.stylistPreference}\n` +
+      `🧴 Type: ${formData.skinHairType}\n` +
+      `📝 Notes: ${formData.message || "No notes"}\n\n` +
+      `Please confirm the appointment.`;
+
+    const whatsappUrl = getWhatsAppUrl(msg);
+
+    // 2. IMMEDIATE REDIRECT (Best for Mobile)
+    window.location.href = whatsappUrl;
+
+    // 3. Optional: Background Sync (Silent)
     try {
-      const res = await fetch("http://localhost:5000/feedback", {
+      fetch(`${API_BASE_URL}/feedback`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          phone: formData.phone,
-          email: formData.email,
-          date: formData.date,
-          type: "Appointment",
-          message: `BOUTIQUE RESERVATION for ${formData.service}. 
-          Time: ${formData.timeSlot}, Stylist: ${formData.stylistPreference}, Type: ${formData.skinHairType}.
-          Client Insight: ${formData.message}`
-        })
-      });
+          ...formData,
+          type: "Appointment"
+        }),
+      }).catch(err => console.log("Silent background sync failed:", err));
+    } catch (e) { }
 
-      if (res.ok) {
-        setShowSuccess(true);
-        setFormData({
-          firstName: "", lastName: "", phone: "", email: "", date: "", service: "Bridal Signature Ritual", message: ""
-        });
-        setTimeout(() => setShowSuccess(false), 5000);
-      } else {
-        alert("Our luxury portal is experiencing high traffic. Please call +91 97376 71768 for instant booking.");
-      }
-    } catch (error) {
-      console.error("Booking Error:", error);
-      alert("Portal Sync Error. Please check your internet or reach us via WhatsApp.");
-    } finally {
-      setIsSubmitting(false);
-    }
+    // 4. Reset Form
+    setFormData({
+      firstName: "", lastName: "", phone: "", email: "", date: "",
+      service: "Bridal Signature Ritual", timeSlot: "10:00 AM - 12:00 PM",
+      stylistPreference: "No Preference", skinHairType: "Normal", message: ""
+    });
+    setIsSubmitting(false);
   };
 
   return (
