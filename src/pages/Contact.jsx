@@ -96,7 +96,7 @@ export default function Contact() {
           <div className="ritual-info-panel">
             <div className="panel-badge">SINCE 2009</div>
             <h2>The <span>Consultation</span> Sanctuary</h2>
-            <p className="panel-desc">We don't just book appointments; we design aesthetic strategies. Your journey begins with a professional analysis of your unique features.</p>
+            <p className="panel-desc">@We don't just book appointments; we design aesthetic strategies. Your journey begins with a professional analysis of your unique features.</p>
 
             <div className="ritual-features">
               <div className="r-feat">
