@@ -1,0 +1,204 @@
+.beauty-ai-fixed {
+    position: fixed;
+    bottom: 120px;
+    /* Positioned above concierge */
+    left: 40px;
+    z-index: 2005;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.beauty-ai-trigger {
+    width: 75px;
+    height: 75px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    position: relative;
+    transition: 0.3s;
+}
+
+.beauty-ai-trigger:hover {
+    transform: scale(1.1);
+    box-shadow: 0 15px 40px rgba(164, 124, 72, 0.2);
+}
+
+.ai-icon {
+    font-size: 32px;
+}
+
+.ai-notif {
+    position: absolute;
+    top: -10px;
+    right: -25px;
+    background: #ff3e3e;
+    /* Red badge from screenshot */
+    color: white;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 5px 15px rgba(255, 62, 62, 0.4);
+    white-space: nowrap;
+}
+
+.ai-wave {
+    position: absolute;
+    inset: -5px;
+    border: 1px solid rgba(164, 124, 72, 0.1);
+    border-radius: 50%;
+    animation: ripple 2s infinite;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* MODAL STYLING */
+.beauty-ai-modal {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 380px;
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 30px 100px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    animation: slideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(50px) scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+.ai-header {
+    background: #1a1a1a;
+    padding: 25px 30px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ai-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    margin: 0;
+}
+
+.ai-header h3 span {
+    color: #a47c48;
+}
+
+.close-ai {
+    font-size: 24px;
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.close-ai:hover {
+    opacity: 1;
+}
+
+.ai-content {
+    padding: 30px;
+}
+
+.ai-msg {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.options-grid button {
+    background: #fdfaf7;
+    border: 1px solid #f2ede4;
+    padding: 15px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: left;
+    transition: 0.3s;
+}
+
+.options-grid button:hover {
+    background: #a47c48;
+    color: white;
+    border-color: #a47c48;
+    transform: translateX(5px);
+}
+
+.result-step {
+    text-align: center;
+}
+
+.success-check {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.rec-products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.p-tag {
+    background: #1a1a1a;
+    color: white;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.reset-btn,
+.book-ai-btn {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+.book-ai-btn {
+    background: #a47c48;
+    color: white;
+}
+
+@media (max-width: 480px) {
+    .beauty-ai-modal {
+        width: 320px;
+        left: -20px;
+        right: auto;
+    }
+}

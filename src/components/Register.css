@@ -1,0 +1,53 @@
+.register-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* 🔥 TAMARI IMAGE */
+  background-image: url("D:\dipaliproject\my-web-app\my-web-app\my-web-app\public\images\register-bg.jpg.JPG");
+  background-size: cover;
+  background-position: center;
+}
+
+.register-card {
+  background: rgba(255, 255, 255, 0.95); /* image upar white card */
+  padding: 30px;
+  width: 360px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+.register-card h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.register-card input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.register-card button {
+  width: 100%;
+  padding: 10px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.register-error {
+  color: red;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.register-link {
+  margin-top: 15px;
+  text-align: center;
+}

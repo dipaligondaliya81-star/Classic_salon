@@ -1,0 +1,86 @@
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  font-family: Segoe UI, sans-serif;
+  background: #f4f6fb;
+}
+
+.admin-page {
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.admin-header {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-user {
+  background: #3498db;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+}
+
+.btn-logout {
+  background: #e74c3c;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  margin-left: 10px;
+}
+
+.admin-tabs {
+  margin: 20px 0;
+}
+
+.admin-tabs button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.admin-tabs .active {
+  background: #1d2671;
+  color: white;
+}
+
+.admin-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.thumb {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.btn-edit { background:#3498db;color:#fff;padding:6px 10px;border:none;border-radius:5px; }
+.btn-delete { background:#e74c3c;color:#fff;padding:6px 10px;border:none;border-radius:5px; }
+.btn-save { background:#27ae60;color:#fff;padding:6px 10px;border:none;border-radius:5px; }
+
+.stats {
+  display: flex;
+  gap: 20px;
+}

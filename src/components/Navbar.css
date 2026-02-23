@@ -1,0 +1,241 @@
+.luxury-navbar {
+    background-color: #f5f1ea;
+    /* Screenshot cream */
+    height: 90px;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.nav-container {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-group {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    flex: 1;
+}
+
+.left-links a {
+    text-decoration: none;
+    color: #111;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    transition: 0.3s;
+}
+
+.left-links a:hover {
+    color: #a47c48;
+}
+
+/* CENTER LOGO */
+.nav-logo-centered {
+    cursor: pointer;
+    text-align: center;
+    padding: 0 40px;
+    transition: 0.4s;
+}
+
+.nav-logo-centered:hover {
+    transform: scale(1.02);
+}
+
+.main-logo-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    margin: 0;
+    letter-spacing: 3px;
+    color: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.gold-letter {
+    color: #a47c48;
+    margin-right: 1px;
+}
+
+.brand-tm {
+    font-size: 11px;
+    vertical-align: super;
+    margin: 0 4px;
+    color: #a47c48;
+    font-weight: 700;
+}
+
+.logo-tagline {
+    font-size: 11px;
+    letter-spacing: 8px;
+    margin-top: 8px;
+    color: #a47c48;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* RIGHT ACTIONS */
+.right-actions {
+    justify-content: flex-end;
+}
+
+.wishlist-icon {
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.wishlist-icon:hover {
+    color: #a47c48;
+}
+
+.login-text {
+    text-decoration: none;
+    color: #111;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.nav-divider {
+    width: 1px;
+    height: 25px;
+    background: #ccc;
+}
+
+/* SEARCH PRO SYSTEM */
+.search-module {
+    min-width: 120px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.search-trigger-pro {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    padding: 8px 15px;
+    border-radius: 30px;
+    transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.search-trigger-pro:hover {
+    background: rgba(164, 124, 72, 0.08);
+}
+
+.search-ico {
+    font-size: 16px;
+    filter: grayscale(1) invert(0.1);
+}
+
+.search-txt {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #1a1a1a;
+}
+
+.search-active-wrap {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: white;
+    padding: 8px 25px;
+    border-radius: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f2ede4;
+    animation: luxuriousExpand 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+@keyframes luxuriousExpand {
+    from {
+        opacity: 0;
+        width: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        width: 300px;
+        transform: translateX(0);
+    }
+}
+
+.nav-search-input {
+    background: transparent;
+    border: none;
+    padding: 5px 0;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    width: 200px;
+    outline: none;
+    color: #1a1a1a;
+}
+
+.search-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #ccc;
+    transition: 0.3s;
+}
+
+.search-close:hover {
+    color: #111;
+    transform: rotate(90deg);
+}
+
+.search-icon-fixed {
+    font-size: 14px;
+    opacity: 0.4;
+}
+
+.gold-member-link {
+    color: #a47c48 !important;
+    text-shadow: 0 0 10px rgba(164, 124, 72, 0.2);
+}
+
+.admin-circle-link {
+    width: 35px;
+    height: 35px;
+    background: #111;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+@media (max-width: 1024px) {
+    .left-links {
+        display: none;
+    }
+
+    .luxury-navbar {
+        height: 70px;
+    }
+
+    .main-logo-title {
+        font-size: 24px;
+    }
+}

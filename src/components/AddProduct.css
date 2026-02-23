@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+.luxe-add-wrapper {
+  min-height: 100vh;
+  background-color: #fdfaf7;
+  font-family: 'Montserrat', sans-serif;
+  padding: 100px 5%;
+  color: #1a1a1a;
+}
+
+.institutional-header {
+  max-width: 1200px;
+  margin: 0 auto 80px;
+  text-align: center;
+}
+
+.institutional-header h1 {
+  font-size: 32px;
+  letter-spacing: 12px;
+  font-weight: 300;
+  margin-bottom: 10px;
+}
+
+.institutional-header h1 span {
+  font-weight: 700;
+  color: #a47c48;
+  margin-left: 15px;
+}
+
+.institutional-header p {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #888;
+  text-transform: uppercase;
+}
+
+.add-ritual-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 60px;
+  background: white;
+  padding: 60px;
+  border-radius: 4px;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.05);
+}
+
+.visual-documentation h3,
+.metadata-ledger h3 {
+  font-size: 11px;
+  letter-spacing: 3px;
+  font-weight: 700;
+  color: #ccc;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.preview-frame {
+  width: 100%;
+  aspect-ratio: 1;
+  background: #fafafa;
+  border: 1px dashed #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+.preview-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.empty-preview {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #bbb;
+  font-weight: 700;
+}
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+.fake-upload-btn {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #1a1a1a;
+  background: transparent;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.pro-field {
+  margin-bottom: 30px;
+}
+
+.pro-field label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.pro-field input,
+.pro-field select {
+  width: 100%;
+  padding: 15px 0;
+  border: none;
+  border-bottom: 1px solid #eee;
+  font-family: inherit;
+  font-size: 16px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.pro-field input:focus,
+.pro-field select:focus {
+  border-bottom-color: #a47c48;
+}
+
+.pro-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.pro-sync-btn {
+  width: 100%;
+  padding: 22px;
+  background: #1a1a1a;
+  color: white;
+  border: none;
+  font-weight: 700;
+  letter-spacing: 3px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 20px;
+}
+
+.pro-sync-btn:hover {
+  background: #a47c48;
+}
+
+.pro-error-msg {
+  color: #c62828;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .add-ritual-grid {
+    grid-template-columns: 1fr;
+    padding: 30px;
+  }
+}

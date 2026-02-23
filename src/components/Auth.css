@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
+.auth-proper-page {
+    background-color: #f2ede4;
+    /* Warm cream background from your image */
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 40px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.auth-proper-grid {
+    display: flex;
+    gap: 40px;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.auth-proper-col {
+    flex: 1;
+}
+
+.auth-proper-title {
+    font-family: 'Montserrat', sans-serif;
+    /* Simplified title as per image */
+    font-size: 32px;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #1a1a1a;
+}
+
+.auth-proper-card {
+    background: #fff;
+    padding: 50px 40px;
+    border-radius: 4px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.02);
+}
+
+.proper-input-group {
+    margin-bottom: 25px;
+}
+
+.proper-input-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.proper-input-group label span {
+    color: #c00;
+}
+
+.proper-input-group input {
+    width: 100%;
+    padding: 15px 25px;
+    border: 1px solid #ddd;
+    border-radius: 50px;
+    /* Pill shape from your image */
+    font-family: inherit;
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.proper-input-group input:focus {
+    border-color: #1a1a1a;
+}
+
+.proper-err {
+    color: #c00;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.proper-form-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    gap: 20px;
+}
+
+.proper-auth-btn {
+    background: #1a1a1a;
+    color: white;
+    padding: 18px 45px;
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.proper-auth-btn:hover {
+    background: #a47c48;
+}
+
+.proper-checkbox {
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.proper-lost-link {
+    display: block;
+    font-size: 14px;
+    color: #1a1a1a;
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px solid #1a1a1a;
+    width: fit-content;
+    padding-bottom: 3px;
+    margin-top: 15px;
+}
+
+.proper-privacy-note {
+    font-size: 13px;
+    color: #333;
+    line-height: 1.8;
+    margin-bottom: 35px;
+}
+
+/* PORTAL ACTIVE */
+.auth-portal-active {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f2ede4;
+}
+
+.portal-card {
+    text-align: center;
+    background: white;
+    padding: 60px;
+    border-radius: 4px;
+}
+
+.portal-card h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    margin-bottom: 20px;
+}
+
+.portal-card h1 span {
+    color: #a47c48;
+    font-style: italic;
+}
+
+.portal-card p {
+    margin-bottom: 40px;
+    color: #777;
+}
+
+.portal-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.portal-actions button {
+    padding: 18px 40px;
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    cursor: pointer;
+    background: #1a1a1a;
+    color: white;
+}
+
+.portal-actions button.logout {
+    background: transparent;
+    border: 1px solid #1a1a1a;
+    color: #1a1a1a;
+}
+
+@media (max-width: 900px) {
+    .auth-proper-grid {
+        flex-direction: column;
+        gap: 60px;
+    }
+}

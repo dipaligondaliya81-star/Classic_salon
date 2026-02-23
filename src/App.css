@@ -1,0 +1,91 @@
+/* GLOBAL TRANSITIONS */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #fcfbf8;
+  color: #1a1a1a;
+  overflow-x: hidden;
+}
+
+/* CUSTOM SLIM SCROLLBAR */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #a47c48;
+  border-radius: 10px;
+}
+
+/* PROFESSIONAL SCROLL PROGRESS BAR */
+.scroll-progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: transparent;
+  z-index: 10001;
+  /* Above almost everything */
+  pointer-events: none;
+}
+
+.scroll-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #a47c48 0%, #c5a075 100%);
+  box-shadow: 0 0 10px rgba(164, 124, 72, 0.5);
+  transition: width 0.1s ease-out;
+}
+
+.luxury-app-main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content-area {
+  flex: 1;
+}
+
+/* CUSTOM CURSOR (OPTIONAL BUT ADVANCED) */
+::selection {
+  background: #a47c48;
+  color: white;
+}
+
+/* SMOOTH SCROLLING */
+html {
+  scroll-behavior: smooth;
+}
+
+/* BUTTONS GLOBAL */
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+/* LINK RESET */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* RESPONSIVE PADDING FOR ALL SECTIONS */
+section {
+  padding: 100px 40px;
+}
+
+@media (max-width: 768px) {
+  section {
+    padding: 60px 20px;
+  }
+}

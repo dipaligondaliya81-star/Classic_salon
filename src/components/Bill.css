@@ -1,0 +1,386 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,700&display=swap');
+
+.bill-page-wrapper {
+  background-color: #f2ede4;
+  /* Boutique cream */
+  min-height: 100vh;
+  padding: 80px 20px;
+  font-family: 'Montserrat', sans-serif;
+  color: #111;
+}
+
+.invoice-container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 60px;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle border deco */
+.invoice-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: #a47c48;
+  /* Luxury Gold */
+}
+
+/* ===== HEADER ===== */
+.invoice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 60px;
+}
+
+.brand-invoice-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+  margin: 0;
+  letter-spacing: -1px;
+}
+
+.brand-invoice-title span {
+  color: #a47c48;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.brand-tagline {
+  font-size: 11px;
+  letter-spacing: 4px;
+  margin-top: 5px;
+  opacity: 0.6;
+}
+
+.invoice-logo {
+  width: 110px;
+  filter: grayscale(1);
+  opacity: 0.7;
+}
+
+/* ===== META INFO ===== */
+.invoice-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+
+.meta-column h3 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  color: #a47c48;
+}
+
+.meta-column p {
+  font-size: 14px;
+  margin: 4px 0;
+  color: #555;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.meta-column h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  margin: 0 0 10px;
+  letter-spacing: 2px;
+}
+
+/* ===== CUSTOMER BAR ===== */
+.customer-info-bar {
+  background: #fdfaf7;
+  padding: 25px 30px;
+  margin-bottom: 40px;
+  border-left: 4px solid #a47c48;
+}
+
+.customer-info-bar h3 {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #888;
+  margin: 0 0 10px;
+}
+
+.cust-name {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.cust-phone {
+  font-size: 14px;
+  color: #666;
+  margin-top: 5px;
+}
+
+/* ===== TABLE ===== */
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 50px;
+}
+
+.invoice-table th {
+  text-align: left;
+  padding: 15px 10px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  border-bottom: 2px solid #111;
+  color: #777;
+}
+
+.invoice-table td {
+  padding: 25px 10px;
+  border-bottom: 1px solid #f2ede4;
+  vertical-align: top;
+}
+
+.item-main-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #000;
+}
+
+.item-sub-cat {
+  font-size: 13px;
+  color: #999;
+}
+
+/* ===== SUMMARY ===== */
+.invoice-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 100px;
+}
+
+.summary-left {
+  flex: 1;
+}
+
+.summary-left h4 {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.summary-left p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #777;
+}
+
+.signature-box {
+  margin-top: 40px;
+}
+
+.sig-line {
+  width: 200px;
+  height: 1px;
+  background: #ddd;
+  margin-bottom: 10px;
+}
+
+.signature-box p {
+  font-size: 12px;
+  color: #999;
+  margin: 0;
+}
+
+.summary-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 0;
+  font-size: 15px;
+}
+
+.total-row {
+  border-top: 2px solid #111;
+  margin-top: 10px;
+  padding-top: 20px;
+  font-size: 24px;
+  font-weight: 700;
+  font-family: 'Playfair Display', serif;
+}
+
+/* ===== FOOTER ===== */
+/* ===== PRODUCT CARE GUIDES ===== */
+.product-guides-section {
+  margin-top: 60px;
+  border-top: 2px solid #f2ede4;
+  padding-top: 40px;
+}
+
+.guide-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  letter-spacing: 3px;
+  color: #a47c48;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.guide-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.guide-card {
+  display: flex;
+  gap: 15px;
+  background: #fdfaf7;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.guide-card img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  background: white;
+  padding: 5px;
+  border: 1px solid #eee;
+}
+
+.guide-content h4 {
+  font-size: 14px;
+  margin: 0 0 5px;
+}
+
+.guide-tip {
+  font-size: 11px;
+  line-height: 1.5;
+  color: #777;
+  margin: 0;
+}
+
+.invoice-footer {
+  margin-top: 60px;
+  padding-top: 40px;
+  border-top: 1px solid #eee;
+  text-align: center;
+}
+
+.invoice-footer p {
+  font-size: 11px;
+  color: #bbb;
+  margin: 5px 0;
+}
+
+/* ===== ACTIONS ===== */
+.invoice-actions {
+  max-width: 900px;
+  margin: 40px auto 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.back-btn,
+.print-trigger-btn {
+  padding: 15px 40px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: 0.3s;
+}
+
+.back-btn {
+  background: white;
+  border: 1px solid #ddd;
+  color: #555;
+}
+
+.print-trigger-btn {
+  background: #a47c48;
+  border: none;
+  color: white;
+}
+
+.print-trigger-btn:hover {
+  background: #000;
+}
+
+/* ===== PRINT OVERRIDES ===== */
+@media print {
+
+  .no-print,
+  .invoice-actions {
+    display: none !important;
+  }
+
+  .bill-page-wrapper {
+    padding: 0;
+    background: white;
+  }
+
+  .invoice-container {
+    box-shadow: none;
+    padding: 20px;
+    width: 100%;
+    border-radius: 0;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  #print-area,
+  #print-area * {
+    visibility: visible;
+  }
+
+  #print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .invoice-container {
+    padding: 30px;
+  }
+
+  .invoice-header,
+  .invoice-meta,
+  .invoice-summary {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .text-right {
+    text-align: left;
+  }
+
+  .summary-right {
+    align-items: flex-start;
+  }
+
+  .brand-invoice-title {
+    font-size: 32px;
+  }
+}
