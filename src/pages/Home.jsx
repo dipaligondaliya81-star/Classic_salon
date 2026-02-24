@@ -2,8 +2,11 @@ import "./Home.css";
 import { Link } from "react-router-dom";
 import VipCard from "../components/VipCard";
 import StylistTeam from "../components/StylistTeam";
+import { getWhatsAppUrl } from "../apiConfig";
 
 export default function Home() {
+  const whatsappUrl = getWhatsAppUrl("Hello Classic Salon! I'm interested in booking a session. Please guide me.");
+
   return (
     <div className="home-container">
       {/* HERO SECTION */}
@@ -198,7 +201,7 @@ export default function Home() {
 
       {/* FLOATING ICONS */}
       <div className="floating-icons">
-        <a href="https://wa.me/919737671768" target="_blank" rel="noreferrer" className="float-icon whatsapp">💬</a>
+        <a href={whatsappUrl} target="_blank" rel="noreferrer" className="float-icon whatsapp">💬</a>
         <a href="tel:9737671768" className="float-icon call">📞</a>
         <a href="/contact" className="float-icon enquiry">✉️</a>
       </div>

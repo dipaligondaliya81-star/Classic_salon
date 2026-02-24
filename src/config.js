@@ -1,2 +1,5 @@
-export const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:5000";
+const PROD_URL = "https://classic-salon-backend.vercel.app";
+
+export const API_BASE_URL = window.location.hostname === "localhost"
+  ? "http://localhost:5000"
+  : PROD_URL;

@@ -108,7 +108,7 @@ export default function Bill() {
           <div className="guide-grid">
             {bill.items.map((item, idx) => (
               <div className="guide-card" key={idx}>
-                <img src={item.img ? (item.img.startsWith('http') || item.img.startsWith('/') ? item.img : `http://localhost:5000/uploads/${item.img}`) : ""} alt="" />
+                <img src={item.img ? (item.img.startsWith('http') || item.img.startsWith('/') ? item.img : `${API_BASE_URL}/uploads/${item.img}`) : ""} alt="" />
                 <div className="guide-content">
                   <h4>{item.name}</h4>
                   <p className="guide-tip"><b>Expert Advice:</b> For best results, use sparingly. This professional-grade {item.category || "treatment"} works best on damp hair to lock in moisture and provide long-lasting shine.</p>

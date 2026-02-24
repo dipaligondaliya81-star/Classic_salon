@@ -1,11 +1,13 @@
 import "./FloatingIcons.css";
+import { getWhatsAppUrl } from "../apiConfig";
 
 export default function FloatingIcons() {
+  const whatsappUrl = getWhatsAppUrl("Hello Classic Salon! I'm interested in booking a session. Please guide me.");
   return (
     <div className="floating-icons">
       {/* WHATSAPP */}
       <a
-        href="https://wa.me/919737671768"
+        href={whatsappUrl}
         target="_blank"
         rel="noreferrer"
         className="icon whatsapp"

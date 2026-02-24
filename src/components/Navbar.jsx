@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./Navbar.css";
+import { API_BASE_URL } from "../apiConfig";
 
 export default function Navbar() {
     const navigate = useNavigate();
@@ -12,7 +13,7 @@ export default function Navbar() {
             const query = searchQuery.trim().toLowerCase();
 
             try {
-                const res = await fetch(`http://localhost:5000/products`);
+                const res = await fetch(`${API_BASE_URL}/products`);
                 if (res.ok) {
                     const prods = await res.json();
                     const directMatch = prods.find(p => p.name.toLowerCase() === query);

@@ -456,6 +456,24 @@
     transform: scale(1.05);
 }
 
+.item-action .btn-group {
+    display: flex;
+    gap: 8px;
+}
+
+.wa-quick-btn {
+    background: #25d366 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 12px !important;
+    font-size: 14px !important;
+}
+
+.wa-quick-btn:hover {
+    background: #128c7e !important;
+}
+
 
 /* AWARDS & RECOGNITION SECTION - REFINED */
 .awards-repro-section {

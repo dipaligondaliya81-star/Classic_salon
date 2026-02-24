@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Services.css";
+import { getWhatsAppUrl } from "../apiConfig";
 
 const treatmentData = {
     hair: {
@@ -201,7 +202,10 @@ export default function Services() {
                                             <div className="item-details"><b>{item.name}</b></div>
                                             <div className="item-action">
                                                 <span className="price">₹{item.price}</span>
-                                                <button onClick={() => navigate("/contact")}>BOOK</button>
+                                                <div className="btn-group">
+                                                    <button onClick={() => navigate("/contact")}>BOOK</button>
+                                                    <button className="wa-quick-btn" onClick={() => window.open(getWhatsAppUrl(`*SERVICE INQUIRY*\n-----------------\nI am interested in booking: *${item.name}*\nPrice: ₹${item.price}\n\nPlease provide more details.`), "_blank")}>💬</button>
+                                                </div>
                                             </div>
                                         </div>
                                     ))}

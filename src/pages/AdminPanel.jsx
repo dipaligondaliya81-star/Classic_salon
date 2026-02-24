@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./AdminPanel.css";
+import { API_BASE_URL } from "../apiConfig";
 
 export default function AdminPanel() {
   const navigate = useNavigate();
@@ -34,9 +35,9 @@ export default function AdminPanel() {
     if (!silent) setLoading(true);
     try {
       const [catRes, prodRes, feedRes] = await Promise.all([
-        fetch("http://localhost:5000/categories"),
-        fetch("http://localhost:5000/products"),
-        fetch(`http://localhost:5000/admin/feedback?userId=${adminUser.id}`)
+        fetch(`${API_BASE_URL}/categories`),
+        fetch(`${API_BASE_URL}/products`),
+        fetch(`${API_BASE_URL}/admin/feedback?userId=${adminUser.id}`)
       ]);
 
       if (!catRes.ok || !prodRes.ok) throw new Error("Connection Failure");
@@ -60,7 +61,7 @@ export default function AdminPanel() {
     if (!window.confirm("CONFIRM REMOVAL: This asset will be permanently purged from the boutique database. Proceed?")) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/admin/products/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/admin/products/${id}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId: adminUser.id })
@@ -94,7 +95,7 @@ export default function AdminPanel() {
     formData.append("image", imageFile);
 
     try {
-      const res = await fetch("http://localhost:5000/products", {
+      const res = await fetch(`${API_BASE_URL}/products`, {
         method: "POST",
         body: formData,
       });
@@ -377,7 +378,7 @@ export default function AdminPanel() {
                         <tr key={p.id}>
                           <td>
                             <img
-                              src={p.img ? `http://localhost:5000/uploads/${p.img}` : "https://via.placeholder.com/50"}
+                              src={p.img ? `${API_BASE_URL}/uploads/${p.img}` : "https://via.placeholder.com/50"}
                               alt=""
                               className="table-img"
                             />
@@ -451,7 +452,7 @@ export default function AdminPanel() {
                               btn.disabled = true;
                               btn.innerText = "ACCEPTING...";
                               try {
-                                const res = await fetch(`http://localhost:5000/admin/feedback/${f.id}`, {
+                                const res = await fetch(`${API_BASE_URL}/admin/feedback/${f.id}`, {
                                   method: 'PUT',
                                   headers: { 'Content-Type': 'application/json' },
                                   body: JSON.stringify({ userId: adminUser.id, status: 'Confirmed' })
@@ -493,7 +494,7 @@ export default function AdminPanel() {
                         </div>
                         <button className="pro-delete-small-btn" onClick={async () => {
                           if (window.confirm("Purge this record?")) {
-                            await fetch(`http://localhost:5000/admin/feedback/${f.id}`, {
+                            await fetch(`${API_BASE_URL}/admin/feedback/${f.id}`, {
                               method: 'DELETE',
                               headers: { 'Content-Type': 'application/json' },
                               body: JSON.stringify({ userId: adminUser.id })

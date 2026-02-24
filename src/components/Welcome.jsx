@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { API_BASE_URL } from "../apiConfig";
 import "./Welcome.css";
 
 export default function Welcome({ cart, setCart, isCartOpen, setIsCartOpen, addToCart }) {
@@ -36,8 +37,8 @@ export default function Welcome({ cart, setCart, isCartOpen, setIsCartOpen, addT
   const fetchData = async () => {
     try {
       const [catRes, prodRes] = await Promise.all([
-        fetch("http://localhost:5000/categories"),
-        fetch("http://localhost:5000/products")
+        fetch(`${API_BASE_URL}/categories`),
+        fetch(`${API_BASE_URL}/products`)
       ]);
 
       if (catRes.ok && prodRes.ok) {
@@ -63,7 +64,7 @@ export default function Welcome({ cart, setCart, isCartOpen, setIsCartOpen, addT
   const getImageUrl = (img) => {
     if (!img) return "https://via.placeholder.com/300";
     if (img.startsWith("/images/") || img.startsWith("http")) return img;
-    return `http://localhost:5000/uploads/${img}`;
+    return `${API_BASE_URL}/uploads/${img}`;
   };
 
   /* ================= HELPERS ================= */

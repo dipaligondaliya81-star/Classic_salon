@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./ProductDetail.css";
+import { API_BASE_URL } from "../apiConfig";
 
 export default function ProductDetail({ addToCart }) {
     const { id } = useParams();
@@ -20,7 +21,7 @@ export default function ProductDetail({ addToCart }) {
     const fetchData = async () => {
         try {
             setLoading(true);
-            const res = await fetch(`http://localhost:5000/products`);
+            const res = await fetch(`${API_BASE_URL}/products`);
             if (res.ok) {
                 const prods = await res.json();
                 const found = prods.find(p => p.id === parseInt(id));
@@ -51,7 +52,7 @@ export default function ProductDetail({ addToCart }) {
         if (!img) return "https://via.placeholder.com/600";
         if (img.startsWith("/images/")) return img;
         if (img.startsWith("http")) return img;
-        return `http://localhost:5000/uploads/${img}`;
+        return `${API_BASE_URL}/uploads/${img}`;
     };
 
     if (loading) return <div className="pdp-loader-overlay"><div className="loader-orbit"></div></div>;

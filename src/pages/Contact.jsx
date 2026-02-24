@@ -51,6 +51,7 @@ export default function Contact() {
     window.location.href = whatsappUrl;
 
     // 3. Optional: Background Sync (Silent)
+    // We don't await this to ensure the redirect happens immediately
     try {
       fetch(`${API_BASE_URL}/feedback`, {
         method: "POST",
@@ -59,7 +60,7 @@ export default function Contact() {
           ...formData,
           type: "Appointment"
         }),
-      }).catch(err => console.log("Silent background sync failed:", err));
+      }).catch(err => console.log("Silent background sync failed (likely no backend):", err));
     } catch (e) { }
 
     // 4. Reset Form
@@ -96,7 +97,7 @@ export default function Contact() {
           <div className="ritual-info-panel">
             <div className="panel-badge">SINCE 2009</div>
             <h2>The <span>Consultation</span> Sanctuary</h2>
-            <p className="panel-desc">@We don't just book appointments; we design aesthetic strategies. Your journey begins with a professional analysis of your unique features.</p>
+            <p className="panel-desc">We don't just book appointments; we design aesthetic strategies. Your journey begins with a professional analysis of your unique features.</p>
 
             <div className="ritual-features">
               <div className="r-feat">
@@ -147,7 +148,7 @@ export default function Contact() {
               <div className="p-form-row">
                 <div className="p-field">
                   <label>MOBILE NUMBER *</label>
-                  <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+91" required />
+                  <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+91 97376 71768" required />
                 </div>
                 <div className="p-field">
                   <label>EMAIL ADDRESS</label>
