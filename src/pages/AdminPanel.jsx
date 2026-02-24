@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./AdminPanel.css";
-import { API_BASE_URL } from "../apiConfig";
+import { API_BASE_URL, getWhatsAppUrl } from "../apiConfig";
 
 export default function AdminPanel() {
   const navigate = useNavigate();
@@ -458,7 +458,10 @@ export default function AdminPanel() {
                                   body: JSON.stringify({ userId: adminUser.id, status: 'Confirmed' })
                                 });
                                 if (res.ok) {
-                                  alert(`SUCCESS: ${f.firstName}'s ritual is now confirmed!`);
+                                  // Open WhatsApp to notify client
+                                  const notifyMsg = `🌸 *Classic Salon - Appointment Confirmed* 🌸\n\nHello ${f.firstName}!\nWe are happy to confirm your appointment for: \n📅 Date: ${f.date || "TBD"}\n${f.message ? "\n" + f.message : ""}\n\nSee you soon! ✨`;
+                                  window.open(`https://wa.me/${f.phone.replace(/\D/g, '')}?text=${encodeURIComponent(notifyMsg)}`, "_blank");
+
                                   await new Promise(resolve => setTimeout(resolve, 500));
                                   await fetchData(true);
                                   setFilterStatus('Confirmed');
@@ -473,12 +476,12 @@ export default function AdminPanel() {
                                 btn.disabled = false;
                                 btn.innerText = `✓ ACCEPT ${f.firstName}`;
                               }
-                            }}>✓ ACCEPT {f.firstName}</button>
+                            }}>✓ ACCEPT & WHATSAPP</button>
                           )}
                           <select className="status-selector" value={f.status || 'Pending'} onChange={async (e) => {
                             const newStatus = e.target.value;
                             try {
-                              const res = await fetch(`http://localhost:5000/admin/feedback/${f.id}`, {
+                              const res = await fetch(`${API_BASE_URL}/admin/feedback/${f.id}`, {
                                 method: 'PUT',
                                 headers: { 'Content-Type': 'application/json' },
                                 body: JSON.stringify({ userId: adminUser.id, status: newStatus })
