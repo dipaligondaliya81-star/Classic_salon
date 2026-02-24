@@ -137,22 +137,22 @@ export default function Contact() {
               <div className="p-form-row">
                 <div className="p-field">
                   <label>FIRST NAME *</label>
-                  <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} placeholder="Gondaliya" required />
+                  <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} required />
                 </div>
                 <div className="p-field">
                   <label>LAST NAME</label>
-                  <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} placeholder="Dipali" />
+                  <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} />
                 </div>
               </div>
 
               <div className="p-form-row">
                 <div className="p-field">
                   <label>MOBILE NUMBER *</label>
-                  <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+91 97376 71768" required />
+                  <input type="tel" name="phone" value={formData.phone} onChange={handleChange} required />
                 </div>
                 <div className="p-field">
                   <label>EMAIL ADDRESS</label>
-                  <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="client@elite.com" />
+                  <input type="email" name="email" value={formData.email} onChange={handleChange} />
                 </div>
               </div>
 
@@ -197,12 +197,12 @@ export default function Contact() {
 
               <div className="p-field full">
                 <label>SKIN / HAIR TYPE (FOR PRE-ANALYSIS)</label>
-                <input type="text" name="skinHairType" value={formData.skinHairType} onChange={handleChange} placeholder="e.g. Oily Skin / Color-Treated Hair" />
+                <input type="text" name="skinHairType" value={formData.skinHairType} onChange={handleChange} />
               </div>
 
               <div className="p-field full">
                 <label>CLIENT INSIGHT / ADDITIONAL NOTES</label>
-                <textarea name="message" value={formData.message} onChange={handleChange} placeholder="Kindly share any specific concerns or past salon history."></textarea>
+                <textarea name="message" value={formData.message} onChange={handleChange}></textarea>
               </div>
 
               <button type="submit" className="portal-submit-btn" disabled={isSubmitting}>
