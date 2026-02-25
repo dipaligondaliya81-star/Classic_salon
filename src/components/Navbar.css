@@ -226,6 +226,14 @@
     font-weight: 700;
 }
 
+.mobile-toggle {
+    display: none;
+}
+
+.mobile-only-actions {
+    display: none;
+}
+
 @media (max-width: 1024px) {
     .luxury-navbar {
         height: 70px;
@@ -233,7 +241,7 @@
     }
 
     .nav-container {
-        padding: 0;
+        padding: 0 15px;
     }
 
     .main-logo-title {
@@ -331,12 +339,4 @@
         left: 50%;
         transform: translateX(-50%);
     }
-}
-
-.mobile-toggle {
-    display: none;
-}
-
-.mobile-only-actions {
-    display: none;
 }
