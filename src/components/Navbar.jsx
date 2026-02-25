@@ -106,7 +106,6 @@ export default function Navbar() {
                         )}
                     </div>
 
-                    <Link to="/admin-login" className="admin-circle-link">A</Link>
                 </div>
             </div>
         </nav>
