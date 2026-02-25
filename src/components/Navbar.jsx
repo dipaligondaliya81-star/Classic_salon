@@ -7,6 +7,7 @@ export default function Navbar() {
     const navigate = useNavigate();
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const handleSearchSubmit = async (e) => {
         if (e.key === "Enter" && searchQuery.trim()) {
@@ -38,16 +39,28 @@ export default function Navbar() {
     return (
         <nav className="luxury-navbar">
             <div className="nav-container">
-                {/* LEFT LINKS */}
-                <div className="nav-group left-links">
-                    <Link to="/about">ABOUT</Link>
-                    <Link to="/products">PRODUCTS</Link>
-                    <Link to="/services">SERVICES</Link>
-                    <Link to="/contact">CONTACT US</Link>
+                {/* HAMBURGER FOR MOBILE */}
+                <div className="mobile-toggle" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+                    <span className={`bar ${isMobileMenuOpen ? "active" : ""}`}></span>
+                    <span className={`bar ${isMobileMenuOpen ? "active" : ""}`}></span>
+                    <span className={`bar ${isMobileMenuOpen ? "active" : ""}`}></span>
+                </div>
+
+                {/* LEFT LINKS (Now also works as Mobile Menu) */}
+                <div className={`nav-group left-links ${isMobileMenuOpen ? "mobile-open" : ""}`}>
+                    <Link to="/about" onClick={() => setIsMobileMenuOpen(false)}>ABOUT</Link>
+                    <Link to="/products" onClick={() => setIsMobileMenuOpen(false)}>PRODUCTS</Link>
+                    <Link to="/services" onClick={() => setIsMobileMenuOpen(false)}>SERVICES</Link>
+                    <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>CONTACT US</Link>
+
+                    {/* Extra mobile-only links if needed */}
+                    <div className="mobile-only-actions">
+                        <Link to="/login" onClick={() => setIsMobileMenuOpen(false)}>LOGIN</Link>
+                    </div>
                 </div>
 
                 {/* CENTER LOGO */}
-                <div className="nav-logo-centered" onClick={() => navigate("/")}>
+                <div className="nav-logo-centered" onClick={() => { navigate("/"); setIsMobileMenuOpen(false); }}>
                     <div className="logo-text-wrap">
                         <h1 className="main-logo-title">
                             C<span className="gold-letter">L</span>ASSIC
@@ -65,9 +78,9 @@ export default function Navbar() {
                     {localStorage.getItem("user") ? (
                         <Link to="/account" className="login-text gold-member-link">LOGIN</Link>
                     ) : (
-                        <Link to="/login" className="login-text">LOGIN</Link>
+                        <Link to="/login" className="login-text hide-on-mobile">LOGIN</Link>
                     )}
-                    <div className="nav-divider"></div>
+                    <div className="nav-divider hide-on-mobile"></div>
 
                     <div className="search-module">
                         {isSearchOpen ? (
@@ -88,7 +101,7 @@ export default function Navbar() {
                         ) : (
                             <div className="search-trigger-pro" onClick={() => setIsSearchOpen(true)}>
                                 <span className="search-ico">🔍</span>
-                                <span className="search-txt">SEARCH</span>
+                                <span className="search-txt hide-on-mobile">SEARCH</span>
                             </div>
                         )}
                     </div>

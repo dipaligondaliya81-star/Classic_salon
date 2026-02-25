@@ -227,15 +227,116 @@
 }
 
 @media (max-width: 1024px) {
-    .left-links {
-        display: none;
-    }
-
     .luxury-navbar {
         height: 70px;
+        padding: 0 15px;
+    }
+
+    .nav-container {
+        padding: 0;
     }
 
     .main-logo-title {
-        font-size: 24px;
+        font-size: 20px;
+        letter-spacing: 1px;
     }
+
+    .logo-tagline {
+        font-size: 8px;
+        letter-spacing: 4px;
+    }
+
+    /* HAMBURGER STYLES */
+    .mobile-toggle {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        z-index: 1001;
+        width: 30px;
+    }
+
+    .bar {
+        width: 100%;
+        height: 2px;
+        background: #111;
+        transition: 0.4s;
+    }
+
+    .bar.active:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    .bar.active:nth-child(2) {
+        opacity: 0;
+    }
+
+    .bar.active:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* MOBILE DRAWER */
+    .left-links {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        height: 100vh;
+        background: #fdfaf7;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        transition: 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        z-index: 1000;
+        box-shadow: 20px 0 50px rgba(0, 0, 0, 0.1);
+    }
+
+    .left-links.mobile-open {
+        left: 0;
+    }
+
+    .left-links a {
+        font-size: 20px;
+        letter-spacing: 3px;
+    }
+
+    .mobile-only-actions {
+        display: block;
+        border-top: 1px solid #eee;
+        padding-top: 30px;
+        width: 60%;
+        text-align: center;
+    }
+
+    .hide-on-mobile {
+        display: none !important;
+    }
+
+    .nav-divider {
+        display: none;
+    }
+
+    .right-actions {
+        gap: 15px;
+    }
+
+    .search-module {
+        min-width: unset;
+    }
+
+    .nav-logo-centered {
+        padding: 0;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+.mobile-toggle {
+    display: none;
+}
+
+.mobile-only-actions {
+    display: none;
 }
