@@ -46,15 +46,35 @@ export default function Welcome({ cart, setCart, isCartOpen, setIsCartOpen, addT
         prods = await prodRes.json();
       }
 
-      // 🌟 FALLBACK PRODUCTS (Restore original branded products)
+      // 🌟 FULL BOUTIQUE CATALOG (Fallback for Vercel/Empty DB)
       if (!Array.isArray(prods) || prods.length === 0) {
         prods = [
-          { id: 'f1', name: "Gondaliya Signature Glow Face Wash", price: 1250, category: "Face Wash", img: "/images/SHOWERJEL.jpg", discount: 10 },
-          { id: 'f2', name: "Ultra-Purifying Charcoal Ritual", price: 950, category: "Face Wash", img: "/images/facewash.jpg" },
-          { id: 'f3', name: "Vitamin C Aura Brightening", price: 1400, category: "Face Wash", img: "/images/facewash4.jpg", discount: 15 },
-          { id: 'f4', name: "Argan Oil Luxury Shampoo", price: 1800, category: "Shampoo", img: "/images/loreal-shampoo.jpg" },
-          { id: 'f5', name: "Deep Repair Keratin Mask", price: 2100, category: "Hair Mask", img: "/images/ketatin mask.jpg", discount: 5 },
-          { id: 'f6', name: "Luxe Rose Infusion Serum", price: 2800, category: "Serum", img: "/images/loreal-serum.jpg" }
+          // SHAMPOOS
+          { id: 'f1', name: "L'Oréal Professionnel Repair Shampoo", price: 1800, category: "Shampoo", img: "/images/loreal-shampoo.jpg", discount: 10 },
+          { id: 'f2', name: "L'Oréal Professionnel Smooth Ritual", price: 1950, category: "Shampoo", img: "/images/smoth shampooo.jpg" },
+          { id: 'f10', name: "Anti-Hairfall Control Shampoo", price: 1650, category: "Shampoo", img: "/images/hairfall sampo.jpg" },
+          { id: 'f11', name: "Nourishing Growth Shampoo", price: 1750, category: "Shampoo", img: "/images/Nourish hair cowth sampo.jpg" },
+          { id: 'f12', name: "Dry Hair Rescue Shampoo", price: 1550, category: "Shampoo", img: "/images/dry hair sampo.jpg" },
+          { id: 'f13', name: "Tresemmé Smooth & Shine", price: 1200, category: "Shampoo", img: "/images/Tresme shmpoo.jpg" },
+
+          // FACE WASH & SKIN
+          { id: 'f3', name: "Gondaliya Signature Glow Wash", price: 1250, category: "Face Wash", img: "/images/facewash.jpg", discount: 15 },
+          { id: 'f4', name: "Vitamin C Aura Brightening", price: 1400, category: "Face Wash", img: "/images/facewash4.jpg" },
+          { id: 'f14', name: "Ultra-Purifying Charcoal Ritual", price: 1100, category: "Face Wash", img: "/images/SHOWERJEL.jpg" },
+
+          // SERUMS & OILS
+          { id: 'f5', name: "L'Oréal Professional Serum", price: 2100, category: "Serum", img: "/images/loreal-serum.jpg", discount: 5 },
+          { id: 'f6', name: "Xtenso Care Professional", price: 2250, category: "Serum", img: "/images/xtensho shiram.jpg" },
+          { id: 'f15', name: "Streax Professional Shine Serum", price: 1350, category: "Serum", img: "/images/streax professional serum.jpg" },
+          { id: 'f16', name: "Global Tresemmé Serum", price: 1850, category: "Serum", img: "/images/tresemme globle serum.jpg" },
+
+          // HAIR MASKS & TREATMENTS
+          { id: 'f7', name: "Deep Repair Keratin Mask", price: 2800, category: "Hair Mask", img: "/images/ketatin mask.jpg", discount: 20 },
+          { id: 'f8', name: "Kerasmooth Master Mask", price: 3200, category: "Hair Mask", img: "/images/kerasmoth mask.jpg" },
+          { id: 'f9', name: "Botox Hair Ritual Therapy", price: 4500, category: "Hair Treatment", img: "/images/botox.jpg" },
+          { id: 'f17', name: "Elite Bond Repair Mask", price: 3500, category: "Hair Treatment", img: "/images/plex bond repair sampo.jpg" },
+          { id: 'f18', name: "Kanpeki Professional Ritual", price: 4200, category: "Hair Treatment", img: "/images/mask-kanpeki.jpg" },
+          { id: 'f19', name: "Hair Color Protection Mask", price: 2400, category: "Hair Mask", img: "/images/professional  hair mask.jpg" }
         ];
       }
 
@@ -69,11 +89,15 @@ export default function Welcome({ cart, setCart, isCartOpen, setIsCartOpen, addT
     } catch (err) {
       console.error("Failed to fetch shop data, using fallback:", err);
       const fallbacks = [
-        { id: 'f1', name: "Gondaliya Signature Glow Face Wash", price: 1250, category: "Face Wash", img: "/images/SHOWERJEL.jpg", discount: 10 },
-        { id: 'f4', name: "Argan Oil Luxury Shampoo", price: 1800, category: "Shampoo", img: "/images/loreal-shampoo.jpg" }
+        { id: 'f1', name: "L'Oréal Professionnel Repair Shampoo", price: 1800, category: "Shampoo", img: "/images/loreal-shampoo.jpg", discount: 10 },
+        { id: 'f3', name: "Gondaliya Signature Glow Wash", price: 1250, category: "Face Wash", img: "/images/facewash.jpg", discount: 15 },
+        { id: 'f5', name: "L'Oréal Professional Serum", price: 2100, category: "Serum", img: "/images/loreal-serum.jpg" },
+        { id: 'f7', name: "Deep Repair Keratin Mask", price: 2800, category: "Hair Mask", img: "/images/ketatin mask.jpg", discount: 20 },
+        { id: 'f9', name: "Botox Hair Ritual Therapy", price: 4500, category: "Hair Treatment", img: "/images/botox.jpg" },
+        { id: 'f19', name: "Hair Color Protection Mask", price: 2400, category: "Hair Mask", img: "/images/professional  hair mask.jpg" }
       ];
       setProducts(fallbacks.map(p => ({ ...p, rating: "4.9", stock: 10, brand: "CLASSIC BOUTIQUE" })));
-      setCategories(["ALL", "FACE WASH", "SHAMPOO"]);
+      setCategories(["ALL", "SHAMPOO", "FACE WASH", "SERUM", "HAIR MASK", "HAIR TREATMENT"]);
     } finally {
       setLoading(false);
     }
