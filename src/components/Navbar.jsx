@@ -105,7 +105,9 @@ export default function Navbar() {
                             </div>
                         )}
                     </div>
-
+                    {localStorage.getItem("admin") && (
+                        <Link to="/admin" className="admin-circle-link">A</Link>
+                    )}
                 </div>
             </div>
         </nav>
