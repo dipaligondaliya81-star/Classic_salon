@@ -22,9 +22,9 @@ export default function Footer() {
                     <h4 className="col-title">NAVIGATION</h4>
                     <div className="col-links">
                         <Link to="/">Home</Link>
-                        <Link to="/products">Shop</Link>
+                        <Link to="/products">Products</Link>
                         <Link to="/about">About Us</Link>
-                        <Link to="/services">FAQ's</Link>
+                        <Link to="/services">Services</Link>
                         <Link to="/contact">Contact Us</Link>
                     </div>
                 </div>

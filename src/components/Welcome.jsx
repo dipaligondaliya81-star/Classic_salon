@@ -41,21 +41,40 @@ export default function Welcome({ cart, setCart, isCartOpen, setIsCartOpen, addT
         fetch(`${API_BASE_URL}/products`)
       ]);
 
+      let prods = [];
       if (catRes.ok && prodRes.ok) {
-        const prods = await prodRes.json();
-        if (Array.isArray(prods)) {
-          const uniqueCats = ["ALL", ...new Set(prods.map(p => (p.category || "GENERAL").toUpperCase()))];
-          setCategories(uniqueCats);
-          setProducts(prods.map(p => ({
-            ...p,
-            rating: (Math.random() * (5 - 4.5) + 4.5).toFixed(1),
-            stock: Math.floor(Math.random() * 15) + 3,
-            brand: "CLASSIC BOUTIQUE"
-          })));
-        }
+        prods = await prodRes.json();
       }
+
+      // 🌟 FALLBACK PRODUCTS (If backend is empty or localhost fails on Vercel)
+      if (!Array.isArray(prods) || prods.length === 0) {
+        prods = [
+          { id: 'f1', name: "Gondaliya Signature Glow Face Wash", price: 1250, category: "Face Wash", img: "/images/facewash.jpg", discount: 10 },
+          { id: 'f2', name: "Ultra-Purifying Charcoal Ritual", price: 950, category: "Face Wash", img: "/images/charcoal.jpg" },
+          { id: 'f3', name: "Vitamin C Aura Brightening", price: 1400, category: "Face Wash", img: "/images/vitaminc.jpg", discount: 15 },
+          { id: 'f4', name: "Argan Oil Luxury Shampoo", price: 1800, category: "Shampoo", img: "/images/shampoo.jpg" },
+          { id: 'f5', name: "Deep Repair Keratin Mask", price: 2100, category: "Hair Mask", img: "/images/mask.jpg", discount: 5 },
+          { id: 'f6', name: "Luxe Rose Infusion Serum", price: 2800, category: "Serum", img: "/images/serum.jpg" }
+        ];
+      }
+
+      const uniqueCats = ["ALL", ...new Set(prods.map(p => (p.category || "GENERAL").toUpperCase()))];
+      setCategories(uniqueCats);
+      setProducts(prods.map(p => ({
+        ...p,
+        rating: p.rating || (Math.random() * (5 - 4.5) + 4.5).toFixed(1),
+        stock: p.stock || (Math.floor(Math.random() * 15) + 3),
+        brand: "CLASSIC BOUTIQUE"
+      })));
     } catch (err) {
-      console.error("Failed to fetch shop data:", err);
+      console.error("Failed to fetch shop data, using fallback:", err);
+      // Fallback on error
+      const fallbacks = [
+        { id: 'f1', name: "Gondaliya Signature Glow Face Wash", price: 1250, category: "Face Wash", img: "/images/facewash.jpg", discount: 10 },
+        { id: 'f4', name: "Argan Oil Luxury Shampoo", price: 1800, category: "Shampoo", img: "/images/shampoo.jpg" }
+      ];
+      setProducts(fallbacks.map(p => ({ ...p, rating: "4.9", stock: 10, brand: "CLASSIC BOUTIQUE" })));
+      setCategories(["ALL", "FACE WASH", "SHAMPOO"]);
     } finally {
       setLoading(false);
     }

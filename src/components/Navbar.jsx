@@ -41,7 +41,7 @@ export default function Navbar() {
                 {/* LEFT LINKS */}
                 <div className="nav-group left-links">
                     <Link to="/about">ABOUT</Link>
-                    <Link to="/products">SHOP</Link>
+                    <Link to="/products">PRODUCTS</Link>
                     <Link to="/services">SERVICES</Link>
                     <Link to="/contact">CONTACT US</Link>
                 </div>
