@@ -49,33 +49,43 @@ export default function Welcome({ cart, setCart, isCartOpen, setIsCartOpen, addT
       // 🌟 FULL BOUTIQUE CATALOG (Fallback for Vercel/Empty DB)
       if (!Array.isArray(prods) || prods.length === 0) {
         prods = [
-          // SHAMPOO
+          // SHAMPOO (8 Products)
           { id: 'f1', name: "L'Oréal Professionnel Repair Shampoo", price: 1800, category: "Shampoo", img: "/images/loreal-shampoo.jpg", discount: 10 },
           { id: 'f2', name: "L'Oréal Professionnel Smooth Ritual", price: 1950, category: "Shampoo", img: "/images/smoth shampooo.jpg" },
-          { id: 'f11', name: "Nourishing Growth Shampoo", price: 1750, category: "Shampoo", img: "/images/Nourish hair cowth sampo.jpg" },
+          { id: 'f3', name: "Nourishing Growth Shampoo", price: 1750, category: "Shampoo", img: "/images/Nourish hair cowth sampo.jpg" },
+          { id: 'f4', name: "Deep Repair Keratin Wash", price: 1600, category: "Shampoo", img: "/images/repair sampo.jpg" },
+          { id: 'f5', name: "Anti-Hairfall Control Ritual", price: 1550, category: "Shampoo", img: "/images/hairfall sampo.jpg" },
+          { id: 'f6', name: "Tresemmé Smooth & Shine", price: 1200, category: "Shampoo", img: "/images/Tresme shmpoo.jpg" },
+          { id: 'f7', name: "Dry Hair Rescue Formula", price: 1450, category: "Shampoo", img: "/images/dry hair sampo.jpg" },
+          { id: 'f8', name: "Ultra-Purifying Charcoal Wash", price: 1300, category: "Shampoo", img: "/images/SHOWERJEL.jpg" },
 
-          // FACE WASH
-          { id: 'f3', name: "Classic Boutique Glow Face Wash", price: 1250, category: "Face Wash", img: "/images/SHOWERJEL.jpg", discount: 15 },
-          { id: 'f4', name: "Vitamin C Aura Brightening Wash", price: 1400, category: "Face Wash", img: "/images/facewash4.jpg" },
+          // FACE WASH (4 Products)
+          { id: 'f9', name: "Classic Boutique Glow Face Wash", price: 1250, category: "Face Wash", img: "/images/SHOWERJEL.jpg", discount: 15 },
+          { id: 'f10', name: "Vitamin C Aura Brightening Wash", price: 1400, category: "Face Wash", img: "/images/facewash4.jpg" },
+          { id: 'f11', name: "Charcoal Detox Facial Ritual", price: 950, category: "Face Wash", img: "/images/4949.jpg" },
+          { id: 'f12', name: "Himalayan Rose Infusion", price: 1100, category: "Face Wash", img: "/images/4444444.jpg" },
 
-          // SERUM
-          { id: 'f5', name: "L'Oréal Professional Serum", price: 2100, category: "Serum", img: "/images/loreal-serum.jpg", discount: 5 },
-          { id: 'f6', name: "Xtenso Care Professional Serum", price: 2250, category: "Serum", img: "/images/xtensho shiram.jpg" },
+          // SERUM (4 Products)
+          { id: 'f13', name: "L'Oréal Professional Serum", price: 2100, category: "Serum", img: "/images/loreal-serum.jpg", discount: 5 },
+          { id: 'f14', name: "Xtenso Care Professional Serum", price: 2250, category: "Serum", img: "/images/xtensho shiram.jpg" },
           { id: 'f15', name: "Streax Professional Shine Serum", price: 1350, category: "Serum", img: "/images/streax professional serum.jpg" },
+          { id: 'f16', name: "Global repair Hair Serum", price: 1850, category: "Serum", img: "/images/loreal repair serum.jpg" },
 
-          // HAIR MARK
-          { id: 'f7', name: "Deep Repair Keratin Mask", price: 2800, category: "Hair Mask", img: "/images/ketatin mask.jpg", discount: 20 },
-          { id: 'f8', name: "Kerasmooth professional Mask", price: 3200, category: "Hair Mask", img: "/images/kerasmoth mask.jpg" },
+          // HAIR MASK (4 Products)
+          { id: 'f17', name: "Deep Repair Keratin Mask", price: 2800, category: "Hair Mask", img: "/images/ketatin mask.jpg", discount: 20 },
+          { id: 'f18', name: "Kerasmooth professional Mask", price: 3200, category: "Hair Mask", img: "/images/kerasmoth mask.jpg" },
           { id: 'f19', name: "Color Protection Master Mask", price: 2400, category: "Hair Mask", img: "/images/professional  hair mask.jpg" },
+          { id: 'f20', name: "Ingbear Deep Repair Mask", price: 3100, category: "Hair Mask", img: "/images/ingbear hair mask.jpg" },
 
-          // TREATMENT
-          { id: 'f9', name: "Botox Hair Ritual Therapy", price: 4500, category: "Treatment", img: "/images/botox.jpg" },
-          { id: 'f17', name: "Elite Bond Repair treatment", price: 3500, category: "Treatment", img: "/images/plex bond repair sampo.jpg" },
-          { id: 'f18', name: "Kanpeki Professional Ritual", price: 4200, category: "Treatment", img: "/images/mask-kanpeki.jpg" },
+          // TREATMENT (4 Products)
+          { id: 'f21', name: "Botox Hair Ritual Therapy", price: 4500, category: "Treatment", img: "/images/botox.jpg" },
+          { id: 'f22b', name: "Elite Bond Repair Treatment", price: 3500, category: "Treatment", img: "/images/plex bond repair sampo.jpg" },
+          { id: 'f23b', name: "Kanpeki Professional Ritual", price: 4200, category: "Treatment", img: "/images/mask-kanpeki.jpg" },
+          { id: 'f24b', name: "Super Nourishing Hair Ritual", price: 3800, category: "Treatment", img: "/images/super nourising hair mask.jpg" },
 
-          // HAIR COLOR
-          { id: 'f20', name: "Streax Professional Hair Color", price: 850, category: "Hair Color", img: "/images/strex hair.jpg" },
-          { id: 'f21', name: "Classic Boutique Signature Color", price: 1200, category: "Hair Color", img: "/images/liss.jpg" }
+          // HAIR COLOR (2 Products)
+          { id: 'f25', name: "Streax Professional Hair Color", price: 850, category: "Hair Color", img: "/images/strex hair.jpg" },
+          { id: 'f26', name: "Classic Boutique Signature Color", price: 1200, category: "Hair Color", img: "/images/liss.jpg" }
         ];
       }
 
