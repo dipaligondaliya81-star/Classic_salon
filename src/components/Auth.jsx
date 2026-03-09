@@ -150,11 +150,39 @@ export default function Auth() {
                     <div className="auth-proper-card">
                         <form onSubmit={handleRegister}>
                             <div className="proper-input-group">
+                                <label>Full Name <span>*</span></label>
+                                <input
+                                    type="text"
+                                    value={regFullName}
+                                    onChange={(e) => setRegFullName(e.target.value)}
+                                    placeholder="Enter your full name"
+                                />
+                            </div>
+                            <div className="proper-input-group">
+                                <label>Username <span>*</span></label>
+                                <input
+                                    type="text"
+                                    value={regUser}
+                                    onChange={(e) => setRegUser(e.target.value)}
+                                    placeholder="Choose a username"
+                                />
+                            </div>
+                            <div className="proper-input-group">
                                 <label>Email address <span>*</span></label>
                                 <input
                                     type="email"
                                     value={regEmail}
                                     onChange={(e) => setRegEmail(e.target.value)}
+                                    placeholder="Enter your email"
+                                />
+                            </div>
+                            <div className="proper-input-group">
+                                <label>Phone Number <span>*</span></label>
+                                <input
+                                    type="tel"
+                                    value={regPhone}
+                                    onChange={(e) => setRegPhone(e.target.value)}
+                                    placeholder="Enter mobile number"
                                 />
                             </div>
                             <div className="proper-input-group">
@@ -163,6 +191,7 @@ export default function Auth() {
                                     type="password"
                                     value={regPass}
                                     onChange={(e) => setRegPass(e.target.value)}
+                                    placeholder="Create a password"
                                 />
                             </div>
 

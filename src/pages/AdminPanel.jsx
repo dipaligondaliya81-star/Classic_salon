@@ -8,6 +8,7 @@ export default function AdminPanel() {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [feedbacks, setFeedbacks] = useState([]);
+  const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -34,10 +35,11 @@ export default function AdminPanel() {
   const fetchData = async (silent = false) => {
     if (!silent) setLoading(true);
     try {
-      const [catRes, prodRes, feedRes] = await Promise.all([
+      const [catRes, prodRes, feedRes, orderRes] = await Promise.all([
         fetch(`${API_BASE_URL}/categories`),
         fetch(`${API_BASE_URL}/products`),
-        fetch(`${API_BASE_URL}/admin/feedback?userId=${adminUser.id}`)
+        fetch(`${API_BASE_URL}/admin/feedback?userId=${adminUser.id}`),
+        fetch(`${API_BASE_URL}/admin/orders?userId=${adminUser.id}`)
       ]);
 
       if (!catRes.ok || !prodRes.ok) throw new Error("Connection Failure");
@@ -45,10 +47,12 @@ export default function AdminPanel() {
       const cats = await catRes.json();
       const prods = await prodRes.json();
       const feeds = await feedRes.json();
+      const ords = await orderRes.json();
 
       setCategories(cats);
       setProducts(prods);
       setFeedbacks(Array.isArray(feeds) ? feeds : []);
+      setOrders(Array.isArray(ords) ? ords : []);
     } catch (err) {
       console.error(err);
       if (!silent) setError("COMMUNICATION ERROR: Secure server link unavailable.");
@@ -156,6 +160,9 @@ export default function AdminPanel() {
           <button className={activeTab === 'inventory' ? 'active' : ''} onClick={() => setActiveTab('inventory')}>
             <span className="nav-icon">📊</span> INVENTORY DATA
           </button>
+          <button className={activeTab === 'orders' ? 'active' : ''} onClick={() => setActiveTab('orders')}>
+            <span className="nav-icon">🛍️</span> CLIENT ORDERS
+          </button>
           <button className={activeTab === 'analytics' ? 'active' : ''} onClick={() => setActiveTab('analytics')}>
             <span className="nav-icon">📈</span> SALES ANALYTICS
           </button>
@@ -226,8 +233,8 @@ export default function AdminPanel() {
                 <div className="val">₹{products.reduce((acc, p) => acc + Number(p.price), 0).toLocaleString()}</div>
               </div>
               <div className="stat-card">
-                <div className="label">ACTIVE ASSETS</div>
-                <div className="val">{products.length}</div>
+                <div className="label">CLIENT ORDERS</div>
+                <div className="val">{orders.length}</div>
               </div>
               <div className="stat-card">
                 <div className="label">CATEGORIES</div>
@@ -400,6 +407,51 @@ export default function AdminPanel() {
                   {products.length === 0 && <div className="empty-assets">NO ASSETS REGISTERED IN SYSTEM</div>}
                 </div>
               </div>
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'orders' && (
+          <div className="orders-ritual-view animate-fade">
+            <div className="view-header">
+              <h2>Client <span>Orders</span></h2>
+              <p>Review and process professional boutique purchases. <button className="mini-refresh-btn" onClick={() => fetchData(true)}>↻ SYNC</button></p>
+            </div>
+            <div className="orders-grid">
+              {orders.length === 0 ? (
+                <div className="empty-assets">NO ORDER RECORDS FOUND</div>
+              ) : (
+                <div className="asset-table-card full-width">
+                  <div className="table-responsive">
+                    <table className="pro-asset-table">
+                      <thead>
+                        <tr>
+                          <th>ORDER ID</th>
+                          <th>CUSTOMER</th>
+                          <th>TOTAL</th>
+                          <th>ITEMS</th>
+                          <th>DATE</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {orders.map(o => (
+                          <tr key={o.id}>
+                            <td>#ORD-{o.id}</td>
+                            <td><b>{o.customer_name || 'Guest User'}</b></td>
+                            <td><b className="price-b">₹{Number(o.total).toLocaleString()}</b></td>
+                            <td>
+                              <div className="order-items-summary">
+                                {typeof o.items === 'string' ? JSON.parse(o.items).length : o.items?.length || 0} items
+                              </div>
+                            </td>
+                            <td>{new Date(o.created_at).toLocaleDateString()}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         )}

@@ -10,15 +10,27 @@ const pool = mysql.createPool({
   queueLimit: 0,
 });
 
+let useFallback = false;
+let dbJson = null;
+try {
+  dbJson = require("./db-json");
+} catch(e) {}
+
 // Helper to check connection
 async function checkConnection() {
   try {
     const connection = await pool.getConnection();
     console.log("✓ Connected to MySQL database");
     connection.release();
+    useFallback = false;
     return true;
   } catch (error) {
     console.error("✗ Failed to connect to MySQL:", error.message);
+    if (dbJson) {
+      console.log("⚠️ Switching to JSON FALLBACK MODE (Demo Mode)");
+      useFallback = true;
+      return true; // Return true to allow init to continue
+    }
     return false;
   }
 }
@@ -28,6 +40,8 @@ async function initDb() {
   if (!isConnected) {
     throw new Error("Database connection failed. Is MySQL running?");
   }
+  
+  if (useFallback) return; // Skip SQL init if in fallback mode
 
   // Create Users Table
   await pool.query(`
@@ -139,6 +153,7 @@ async function initDb() {
 
 // User Functions
 async function createUser({ fullName, email, username, password, role }) {
+  if (useFallback) return dbJson.createUser({ fullName, email, username, password, role });
   try {
     const [res] = await pool.query(
       "INSERT INTO users (fullName, email, username, password, role) VALUES (?, ?, ?, ?, ?)",
@@ -156,6 +171,7 @@ async function createUser({ fullName, email, username, password, role }) {
 }
 
 async function findUserByLogin(login) {
+  if (useFallback) return dbJson.findUserByLogin(login);
   // Allow login by email or username
   const [rows] = await pool.query(
     "SELECT * FROM users WHERE email = ? OR username = ?",
@@ -165,11 +181,13 @@ async function findUserByLogin(login) {
 }
 
 async function getAllUsers() {
+  if (useFallback) return dbJson.getAllUsers();
   const [rows] = await pool.query("SELECT id, fullName, email, username, role, created_at FROM users");
   return rows;
 }
 
 async function deleteUser(id) {
+  if (useFallback) return dbJson.deleteUser(id);
   const [res] = await pool.query("DELETE FROM users WHERE id = ?", [id]);
   return res.affectedRows > 0;
 }
@@ -181,17 +199,20 @@ function sanitizeUser(user) {
 
 // Category Functions
 async function getCategories() {
+  if (useFallback) return dbJson.getCategories();
   const [rows] = await pool.query("SELECT * FROM categories");
   return rows;
 }
 
 async function createCategory(name) {
+  if (useFallback) return dbJson.createCategory(name);
   const [res] = await pool.query("INSERT INTO categories (name) VALUES (?)", [name]);
   return { id: res.insertId, name };
 }
 
 // Product Functions
 async function createProduct({ name, price, img, category_id }) {
+  if (useFallback) return dbJson.createProduct({ name, price, img, category_id });
   const [res] = await pool.query(
     "INSERT INTO products (name, price, img, category_id) VALUES (?,?,?,?)",
     [name, price, img, category_id]
@@ -200,6 +221,7 @@ async function createProduct({ name, price, img, category_id }) {
 }
 
 async function listProducts() {
+  if (useFallback) return dbJson.listProducts();
   const [rows] = await pool.query(`
     SELECT p.id, p.name, p.price, p.img, p.category_id, c.name AS category
     FROM products p
@@ -210,6 +232,7 @@ async function listProducts() {
 }
 
 async function updateProduct(id, { name, price, img, category_id }) {
+  if (useFallback) return dbJson.updateProduct(id, { name, price, img, category_id });
   // Dynamic update
   const fields = [];
   const values = [];
@@ -226,12 +249,14 @@ async function updateProduct(id, { name, price, img, category_id }) {
 }
 
 async function deleteProduct(id) {
+  if (useFallback) return dbJson.deleteProduct(id);
   const [res] = await pool.query("DELETE FROM products WHERE id = ?", [id]);
   return res.affectedRows > 0;
 }
 
 // Order Functions
-async function createOrder({ userId, items, total }) {
+async function createOrder({ userId, items, total, customer_name, customer_phone, paymentMethod }) {
+  if (useFallback) return dbJson.createOrder({ userId, items, total, customer_name, customer_phone, paymentMethod });
   const itemsJson = JSON.stringify(items);
   const [res] = await pool.query(
     "INSERT INTO orders (user_id, total, items) VALUES (?, ?, ?)",
@@ -240,8 +265,20 @@ async function createOrder({ userId, items, total }) {
   return { id: res.insertId, total };
 }
 
+async function listOrders() {
+  if (useFallback) return dbJson.listOrders();
+  const [rows] = await pool.query(`
+    SELECT o.id, o.user_id, o.total, o.items, o.created_at, u.fullName AS customer_name
+    FROM orders o
+    LEFT JOIN users u ON o.user_id = u.id
+    ORDER BY o.created_at DESC
+  `);
+  return rows;
+}
+
 // Feedback Functions
 async function createFeedback(data) {
+  if (useFallback) return dbJson.createFeedback(data);
   const { firstName, lastName, phone, email, type, date, message } = data;
   const [res] = await pool.query(
     "INSERT INTO feedbacks (firstName, lastName, phone, email, type, date, message) VALUES (?, ?, ?, ?, ?, ?, ?)",
@@ -252,11 +289,13 @@ async function createFeedback(data) {
 }
 
 async function listFeedbacks() {
+  if (useFallback) return dbJson.listFeedbacks();
   const [rows] = await pool.query("SELECT * FROM feedbacks ORDER BY created_at DESC");
   return rows;
 }
 
 async function deleteFeedback(id) {
+  if (useFallback) return dbJson.deleteFeedback(id);
   const [res] = await pool.query("DELETE FROM feedbacks WHERE id = ?", [id]);
   return res.affectedRows > 0;
 }
@@ -281,6 +320,7 @@ module.exports = {
   createCategory,
   // Order
   createOrder,
+  listOrders,
   // Feedback
   createFeedback,
   listFeedbacks,

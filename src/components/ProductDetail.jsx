@@ -122,10 +122,12 @@ export default function ProductDetail({ addToCart }) {
                     </div>
 
                     <div className="pdp-actions">
-                        <button className="primary-buy-btn" onClick={() => addToCart(product)}>
-                            ADD TO CART
+                        <button className="primary-buy-btn" onClick={() => { addToCart(product); navigate("/products"); }}>
+                            BUY NOW (DIRECT)
                         </button>
-                        <button className="secondary-wish-btn">ADD TO WISHLIST</button>
+                        <button className="secondary-wish-btn" onClick={() => addToCart(product)}>
+                            ADD TO BAG
+                        </button>
                     </div>
 
                     <div className="pdp-assurance-grid">

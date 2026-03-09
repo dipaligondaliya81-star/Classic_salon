@@ -16,6 +16,7 @@ const {
   updateProduct,
   deleteProduct,
   createOrder,
+  listOrders,
   createFeedback,
   listFeedbacks,
   deleteFeedback,
@@ -175,7 +176,7 @@ app.post("/products", upload.single("image"), async (req, res) => {
 /* ================= BUY / ORDERS ================= */
 
 app.post("/orders", async (req, res) => {
-  const { userId, items, total } = req.body || {};
+  const { userId, items, total, customer_name, customer_phone, paymentMethod } = req.body || {};
 
   if (!items || items.length === 0) {
     return res.status(400).json({ message: "Cart is empty" });
@@ -186,6 +187,9 @@ app.post("/orders", async (req, res) => {
       userId,
       items,
       total,
+      customer_name,
+      customer_phone,
+      paymentMethod
     });
 
     res.status(201).json({
@@ -195,6 +199,18 @@ app.post("/orders", async (req, res) => {
   } catch (error) {
     console.error("Order error", error);
     res.status(500).json({ message: "Failed to place order" });
+  }
+});
+
+app.get("/admin/orders", async (req, res) => {
+  const { userId } = req.query;
+  if (!userId) return res.status(401).json({ message: "Unauthorized" });
+  try {
+    const orders = await listOrders();
+    res.json(orders);
+  } catch (error) {
+    console.error("Fetch orders error", error);
+    res.status(500).json({ message: "Failed to load orders" });
   }
 });
 

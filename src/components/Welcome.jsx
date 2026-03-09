@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { API_BASE_URL } from "../apiConfig";
+import { API_BASE_URL, getWhatsAppUrl } from "../apiConfig";
 import "./Welcome.css";
 
 export default function Welcome({ cart, setCart, isCartOpen, setIsCartOpen, addToCart }) {
@@ -47,46 +47,48 @@ export default function Welcome({ cart, setCart, isCartOpen, setIsCartOpen, addT
       }
 
       // 🌟 FULL BOUTIQUE CATALOG (Fallback for Vercel/Empty DB)
+      const boutiqueCatalog = [
+        // SHAMPOO (8 Items)
+        { id: 'f1', name: "bblunt sampoo", price: 1200, category: "Shampoo", img: "/images/hairfall sampo.jpg", discount: 10 },
+        { id: 'f2', name: "Xtenso Care", price: 1800, category: "Shampoo", img: "/images/Xtenso Care.JPG" },
+        { id: 'f3', name: "Tresme Shmpoo", price: 950, category: "Shampoo", img: "/images/Tresme shmpoo.jpg" },
+        { id: 'f4', name: "L'Oréal Repair Shampoo", price: 1650, category: "Shampoo", img: "/images/loreal-shampoo.jpg" },
+        { id: 'f5', name: "Repair Ritual Shampoo", price: 1400, category: "Shampoo", img: "/images/repair sampo.jpg" },
+        { id: 'f6', name: "Nourish Hair Growth", price: 1750, category: "Shampoo", img: "/images/Nourish hair cowth sampo.jpg" },
+        { id: 'f7', name: "Dry Hair Rescue", price: 1550, category: "Shampoo", img: "/images/dry hair sampo.jpg" },
+        { id: 'f8', name: "Smooth Ritual Wash", price: 1950, category: "Shampoo", img: "/images/smoth shampooo.jpg" },
+
+        // FACE WASH (4 Items)
+        { id: 'f9', name: "Skeyndor Power C+", price: 3200, category: "Face Wash", img: "/images/4444444.jpg", discount: 15 },
+        { id: 'f10', name: "Classic Boutique Wash", price: 1100, category: "Face Wash", img: "/images/SHOWERJEL.jpg" },
+        { id: 'f11', name: "Vitamin C Brightening", price: 1400, category: "Face Wash", img: "/images/4949.jpg" },
+        { id: 'f12', name: "Purifying Facial Wash", price: 950, category: "Face Wash", img: "/images/4444444.jpg" },
+
+        // SERUM (4 Items)
+        { id: 'f13', name: "Xtensho Shiram", price: 1600, category: "Serum", img: "/images/xtensho shiram.jpg", discount: 5 },
+        { id: 'f14', name: "Tresemme Serum", price: 1100, category: "Serum", img: "/images/tresemme serum.jpg" },
+        { id: 'f15', name: "Tresemme Globle Serum", price: 1450, category: "Serum", img: "/images/tresemme globle serum.jpg" },
+        { id: 'f16', name: "Streax Shine Serum", price: 850, category: "Serum", img: "/images/streax professional serum.jpg" },
+
+        // HAIR MASK (4 Items)
+        { id: 'f17', name: "hair spa", price: 2200, category: "Hair Mask", img: "/images/spa.jpg", discount: 20 },
+        { id: 'f18', name: "Ubuty Hair Mask", price: 1400, category: "Hair Mask", img: "/images/ubuty hair mask.jpg" },
+        { id: 'f19', name: "Keratin Master Mask", price: 2800, category: "Hair Mask", img: "/images/ketatin mask.jpg" },
+        { id: 'f20', name: "Loreal Professional Mask", price: 2400, category: "Hair Mask", img: "/images/loreal-mask.jpg" },
+
+        // TREATMENT (4 Items)
+        { id: 'f21', name: "Botox Hair Ritual", price: 4500, category: "Treatment", img: "/images/botox.jpg" },
+        { id: 'f22b', name: "Elite Bond Repair", price: 3500, category: "Treatment", img: "/images/plex bond repair sampo.jpg" },
+        { id: 'f23b', name: "Kanpeki Professional", price: 4200, category: "Treatment", img: "/images/mask-kanpeki.jpg" },
+        { id: 'f24b', name: "Super Nourish Ritual", price: 3800, category: "Treatment", img: "/images/super nourising hair mask.jpg" },
+
+        // HAIR COLOR (2 Items)
+        { id: 'f25', name: "hair color lorial", price: 850, category: "Hair Color", img: "/images/strex hair.jpg" },
+        { id: 'f26', name: "Classic Signature Color", price: 1200, category: "Hair Color", img: "/images/liss.jpg" }
+      ];
+
       if (!Array.isArray(prods) || prods.length === 0) {
-        prods = [
-          // SHAMPOO (8 Items)
-          { id: 'f1', name: "bblunt sampoo", price: 1200, category: "Shampoo", img: "/images/hairfall sampo.jpg", discount: 10 },
-          { id: 'f2', name: "Xtenso Care", price: 1800, category: "Shampoo", img: "/images/Xtenso Care.JPG" },
-          { id: 'f3', name: "Tresme Shmpoo", price: 950, category: "Shampoo", img: "/images/Tresme shmpoo.jpg" },
-          { id: 'f4', name: "L'Oréal Repair Shampoo", price: 1650, category: "Shampoo", img: "/images/loreal-shampoo.jpg" },
-          { id: 'f5', name: "Repair Ritual Shampoo", price: 1400, category: "Shampoo", img: "/images/repair sampo.jpg" },
-          { id: 'f6', name: "Nourish Hair Growth", price: 1750, category: "Shampoo", img: "/images/Nourish hair cowth sampo.jpg" },
-          { id: 'f7', name: "Dry Hair Rescue", price: 1550, category: "Shampoo", img: "/images/dry hair sampo.jpg" },
-          { id: 'f8', name: "Smooth Ritual Wash", price: 1950, category: "Shampoo", img: "/images/smoth shampooo.jpg" },
-
-          // FACE WASH (4 Items)
-          { id: 'f9', name: "Skeyndor Power C+", price: 3200, category: "Face Wash", img: "/images/4444444.jpg", discount: 15 },
-          { id: 'f10', name: "Classic Boutique Wash", price: 1100, category: "Face Wash", img: "/images/SHOWERJEL.jpg" },
-          { id: 'f11', name: "Vitamin C Brightening", price: 1400, category: "Face Wash", img: "/images/4949.jpg" },
-          { id: 'f12', name: "Purifying Facial Wash", price: 950, category: "Face Wash", img: "/images/4444444.jpg" },
-
-          // SERUM (4 Items)
-          { id: 'f13', name: "Xtensho Shiram", price: 1600, category: "Serum", img: "/images/xtensho shiram.jpg", discount: 5 },
-          { id: 'f14', name: "Tresemme Serum", price: 1100, category: "Serum", img: "/images/tresemme serum.jpg" },
-          { id: 'f15', name: "Tresemme Globle Serum", price: 1450, category: "Serum", img: "/images/tresemme globle serum.jpg" },
-          { id: 'f16', name: "Streax Shine Serum", price: 850, category: "Serum", img: "/images/streax professional serum.jpg" },
-
-          // HAIR MASK (4 Items)
-          { id: 'f17', name: "hair spa", price: 2200, category: "Hair Mask", img: "/images/spa.jpg", discount: 20 },
-          { id: 'f18', name: "Ubuty Hair Mask", price: 1400, category: "Hair Mask", img: "/images/ubuty hair mask.jpg" },
-          { id: 'f19', name: "Keratin Master Mask", price: 2800, category: "Hair Mask", img: "/images/ketatin mask.jpg" },
-          { id: 'f20', name: "Loreal Professional Mask", price: 2400, category: "Hair Mask", img: "/images/loreal-mask.jpg" },
-
-          // TREATMENT (4 Items)
-          { id: 'f21', name: "Botox Hair Ritual", price: 4500, category: "Treatment", img: "/images/botox.jpg" },
-          { id: 'f22b', name: "Elite Bond Repair", price: 3500, category: "Treatment", img: "/images/plex bond repair sampo.jpg" },
-          { id: 'f23b', name: "Kanpeki Professional", price: 4200, category: "Treatment", img: "/images/mask-kanpeki.jpg" },
-          { id: 'f24b', name: "Super Nourish Ritual", price: 3800, category: "Treatment", img: "/images/super nourising hair mask.jpg" },
-
-          // HAIR COLOR (2 Items)
-          { id: 'f25', name: "hair color lorial", price: 850, category: "Hair Color", img: "/images/strex hair.jpg" },
-          { id: 'f26', name: "Classic Signature Color", price: 1200, category: "Hair Color", img: "/images/liss.jpg" }
-        ];
+        prods = boutiqueCatalog;
       }
 
       const uniqueCats = ["ALL", ...new Set(prods.map(p => (p.category || "GENERAL").toUpperCase()))];
@@ -99,14 +101,25 @@ export default function Welcome({ cart, setCart, isCartOpen, setIsCartOpen, addT
       })));
     } catch (err) {
       console.error("Failed to fetch shop data, using fallback:", err);
-      const fallbacks = [
-        { id: 'f1', name: "L'Oréal Professionnel Repair Shampoo", price: 1800, category: "Shampoo", img: "/images/loreal-shampoo.jpg", discount: 10 },
-        { id: 'f3', name: "Gondaliya Signature Glow Wash", price: 1250, category: "Face Wash", img: "/images/SHOWERJEL.jpg", discount: 15 },
-        { id: 'f7', name: "Deep Repair Keratin Mask", price: 2800, category: "Hair Mask", img: "/images/ketatin mask.jpg", discount: 20 },
-        { id: 'f9', name: "Botox Hair Ritual Therapy", price: 4500, category: "Treatment", img: "/images/botox.jpg" },
-        { id: 'f20', name: "Streax Professional Hair Color", price: 850, category: "Hair Color", img: "/images/strex hair.jpg" }
+      // REUSE the same boutiqueCatalog in catch
+      const boutiqueCatalog = [
+        { id: 'f1', name: "bblunt sampoo", price: 1200, category: "Shampoo", img: "/images/hairfall sampo.jpg", discount: 10 },
+        { id: 'f2', name: "Xtenso Care", price: 1800, category: "Shampoo", img: "/images/Xtenso Care.JPG" },
+        { id: 'f3', name: "Tresme Shmpoo", price: 950, category: "Shampoo", img: "/images/Tresme shmpoo.jpg" },
+        { id: 'f4', name: "L'Oréal Repair Shampoo", price: 1650, category: "Shampoo", img: "/images/loreal-shampoo.jpg" },
+        { id: 'f5', name: "Repair Ritual Shampoo", price: 1400, category: "Shampoo", img: "/images/repair sampo.jpg" },
+        { id: 'f6', name: "Nourish Hair Growth", price: 1750, category: "Shampoo", img: "/images/Nourish hair cowth sampo.jpg" },
+        { id: 'f7', name: "Dry Hair Rescue", price: 1550, category: "Shampoo", img: "/images/dry hair sampo.jpg" },
+        { id: 'f8', name: "Smooth Ritual Wash", price: 1950, category: "Shampoo", img: "/images/smoth shampooo.jpg" },
+        { id: 'f9', name: "Skeyndor Power C+", price: 3200, category: "Face Wash", img: "/images/SHOWERJEL.jpg", discount: 15 },
+        { id: 'f10', name: "Classic Boutique Wash", price: 1100, category: "Face Wash", img: "/images/SHOWERJEL.jpg" },
+        { id: 'f11', name: "Vitamin C Brightening", price: 1400, category: "Face Wash", img: "/images/4949.jpg" },
+        { id: 'f13', name: "Xtensho Shiram", price: 1600, category: "Serum", img: "/images/xtensho shiram.jpg", discount: 5 },
+        { id: 'f17', name: "hair spa", price: 2200, category: "Hair Mask", img: "/images/spa.jpg", discount: 20 },
+        { id: 'f21', name: "Botox Hair Ritual", price: 4500, category: "Treatment", img: "/images/botox.jpg" },
+        { id: 'f25', name: "hair color lorial", price: 850, category: "Hair Color", img: "/images/strex hair.jpg" }
       ];
-      setProducts(fallbacks.map(p => ({ ...p, rating: "4.9", stock: 10, brand: "CLASSIC BOUTIQUE" })));
+      setProducts(boutiqueCatalog.map(p => ({ ...p, rating: "4.9", stock: 10, brand: "CLASSIC BOUTIQUE" })));
       setCategories(["ALL", "SHAMPOO", "FACE WASH", "SERUM", "HAIR MASK", "TREATMENT", "HAIR COLOR"]);
     } finally {
       setLoading(false);
@@ -157,14 +170,57 @@ export default function Welcome({ cart, setCart, isCartOpen, setIsCartOpen, addT
       alert("Please provide the customer name and mobile number.");
       return;
     }
+    
     setOrderSuccess(true);
-    // Mimic API processing
-    setTimeout(() => {
-      localStorage.setItem("bill", JSON.stringify({
-        customer, items: cart, total: totalAmount, paymentMethod, date: new Date().toLocaleString()
-      }));
-      navigate("/bill");
-    }, 2800);
+    
+    try {
+      // 🚀 SEND REAL ORDER TO BACKEND
+      const res = await fetch(`${API_BASE_URL}/orders`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId: null, // Guest login
+          customer_name: customer.name, // Passing name directly for Admin Panel
+          items: cart,
+          total: totalAmount,
+          customer_phone: customer.phone,
+          paymentMethod
+        })
+      });
+
+      if (res.ok) {
+        // 💬 GENERATE WHATSAPP MESSAGE
+        const itemDetails = cart.map(i => `• ${i.name} (x${i.qty}) - ₹${calculateTotalPrice(i).toFixed(0)}`).join('\n');
+        const waMsg = `🌸 *New Order - Classic Salon* 🌸\n\n` +
+          `👤 *Customer:* ${customer.name}\n` +
+          `📞 *Phone:* ${customer.phone}\n` +
+          `💰 *Total Amount:* ₹${totalAmount.toFixed(0)}\n` +
+          `💳 *Payment:* ${paymentMethod}\n\n` +
+          `🛍️ *Items:*\n${itemDetails}\n\n` +
+          (paymentMethod === "Online" ? `✨ *Payment Request:* Please send the UPI link or QR code! ✨` : `✨ *Order Confirmed!* ✨`);
+
+        window.open(getWhatsAppUrl(waMsg), "_blank");
+
+        setTimeout(() => {
+          localStorage.setItem("bill", JSON.stringify({
+            customer, items: cart, total: totalAmount, paymentMethod, date: new Date().toLocaleString()
+          }));
+          navigate("/bill");
+        }, 2000);
+      } else {
+        alert("SYNC ERROR: Could not record order in boutique database.");
+        setOrderSuccess(false);
+      }
+    } catch (err) {
+      console.error(err);
+      // Still allow bill generation for UX even if API fails
+      setTimeout(() => {
+        localStorage.setItem("bill", JSON.stringify({
+          customer, items: cart, total: totalAmount, paymentMethod, date: new Date().toLocaleString()
+        }));
+        navigate("/bill");
+      }, 2000);
+    }
   };
 
   if (loading) return (
