@@ -375,14 +375,14 @@ export default function Welcome({ cart, setCart, isCartOpen, setIsCartOpen, addT
           <div className="sidebar-header">
             <div className="header-text">
               <h2>Boutique <span>Bag</span></h2>
-              <div className="step-indicator">STEP 0{checkoutStep} OF 03</div>
+              <div className="step-indicator">STEP 0{checkoutStep} OF 02</div>
             </div>
             <button className="close-sidebar" onClick={() => setIsCartOpen(false)}>×</button>
           </div>
 
           <div className="sidebar-main-content">
 
-            {/* STEP 1: REVIEW BAG */}
+            {/* STEP 1: REVIEW & DETAILS */}
             {checkoutStep === 1 && (
               <div className="checkout-view animate-fade">
                 {cart.length === 0 ? (
@@ -392,73 +392,61 @@ export default function Welcome({ cart, setCart, isCartOpen, setIsCartOpen, addT
                   </div>
                 ) : (
                   <>
-                    <div className="checkout-items-list">
+                    <div className="checkout-items-list-compact">
                       {cart.map(item => (
-                        <div className="mini-item-row" key={item.id}>
-                          <img src={getImageUrl(item.img)} alt="" />
-                          <div className="mini-info">
-                            <h4>{item.name}</h4>
-                            <div className="mini-price">₹{calculateTotalPrice(item).toFixed(0)}</div>
-                            <div className="mini-qty-control">
-                              <button onClick={() => setCart(cart.map(c => c.id === item.id ? { ...c, qty: Math.max(1, c.qty - 1) } : c))}>−</button>
-                              <span>{item.qty}</span>
-                              <button onClick={() => setCart(cart.map(c => c.id === item.id ? { ...c, qty: c.qty + 1 } : c))}>+</button>
-                            </div>
-                          </div>
-                          <button className="mini-remove" onClick={() => setCart(cart.filter(i => i.id !== item.id))}>×</button>
+                        <div className="mini-item-row-compact" key={item.id}>
+                          <span>{item.name} (x{item.qty})</span>
+                          <b>₹{calculateTotalPrice(item).toFixed(0)}</b>
                         </div>
                       ))}
                     </div>
+
+                    <div className="details-form-compact">
+                      <h3>Delivery Details</h3>
+                      <input
+                        placeholder="Your Full Name"
+                        value={customer.name}
+                        onChange={e => setCustomer({ ...customer, name: e.target.value })}
+                      />
+                      <input
+                        placeholder="Mobile Number"
+                        type="tel"
+                        value={customer.phone}
+                        onChange={e => setCustomer({ ...customer, phone: e.target.value })}
+                      />
+
+                      <div className="payment-choice-box">
+                        <label>PAYMENT METHOD</label>
+                        <div className="payment-cards">
+                          <div
+                            className={`pay-card ${paymentMethod === 'Cash' ? 'active' : ''}`}
+                            onClick={() => setPaymentMethod('Cash')}
+                          >
+                            <span className="p-icon">💵</span>
+                            <span className="p-label">CASH / COD</span>
+                          </div>
+                          <div
+                            className={`pay-card ${paymentMethod === 'Online' ? 'active' : ''}`}
+                            onClick={() => setPaymentMethod('Online')}
+                          >
+                            <span className="p-icon">📱</span>
+                            <span className="p-label">ONLINE PAY</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                     <div className="checkout-footer-action">
-                      <div className="subtotal-row"><span>SUBTOTAL</span><b>₹{totalAmount.toFixed(0)}</b></div>
-                      <button className="pro-next-btn" onClick={() => setCheckoutStep(2)}>PROCEED TO DETAILS →</button>
+                      <div className="subtotal-row"><span>TOTAL AMOUNT</span><b>₹{totalAmount.toFixed(0)}</b></div>
+                      <button className="pro-next-btn" onClick={() => setCheckoutStep(2)}>PROCEED TO REVIEW →</button>
                     </div>
                   </>
                 )}
               </div>
             )}
 
-            {/* STEP 2: CUSTOMER DETAILS */}
+            {/* STEP 2: REVIEW & CONFIRM */}
             {checkoutStep === 2 && (
-              <div className="checkout-view animate-fade">
-                <div className="details-form-pro">
-                  <h3>Contact Information</h3>
-                  <p className="form-hint">Please provide your details for the boutique dispatch record.</p>
-
-                  <div className="pro-input-group">
-                    <label>FULL NAME</label>
-                    <input
-                      placeholder="Enter your name"
-                      value={customer.name}
-                      onChange={e => setCustomer({ ...customer, name: e.target.value })}
-                    />
-                  </div>
-                  <div className="pro-input-group">
-                    <label>MOBILE NUMBER</label>
-                    <input
-                      placeholder="Enter 10-digit mobile"
-                      type="tel"
-                      value={customer.phone}
-                      onChange={e => setCustomer({ ...customer, phone: e.target.value })}
-                    />
-                  </div>
-                  <div className="pro-input-group">
-                    <label>SELECT PAYMENT</label>
-                    <div className="pro-payment-toggles">
-                      <button className={paymentMethod === 'Cash' ? 'active' : ''} onClick={() => setPaymentMethod('Cash')}>CASH</button>
-                      <button className={paymentMethod === 'Online' ? 'active' : ''} onClick={() => setPaymentMethod('Online')}>ONLINE</button>
-                    </div>
-                  </div>
-                </div>
-                <div className="checkout-footer-action">
-                  <button className="pro-back-btn" onClick={() => setCheckoutStep(1)}>← BACK TO BAG</button>
-                  <button className="pro-next-btn" onClick={() => setCheckoutStep(3)}>REVIEW ORDER</button>
-                </div>
-              </div>
-            )}
-
-            {/* STEP 3: REVIEW & CONFIRM */}
-            {checkoutStep === 3 && (
               <div className="checkout-view animate-fade">
                 <div className="order-summary-pro">
                   <h3>Order Review</h3>
