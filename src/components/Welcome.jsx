@@ -199,14 +199,22 @@ export default function Welcome({ cart, setCart, isCartOpen, setIsCartOpen, addT
           `🛍️ *Items:*\n${itemDetails}\n\n` +
           (paymentMethod === "Online" ? `✨ *Payment Request:* Please send the UPI link or QR code! ✨` : `✨ *Order Confirmed!* ✨`);
 
-        window.open(getWhatsAppUrl(waMsg), "_blank");
+        // 🚀 NAVIGATION LOGIC: Save bill first, then set up WhatsApp
+        localStorage.setItem("bill", JSON.stringify({
+          customer, items: cart, total: totalAmount, paymentMethod, date: new Date().toLocaleString()
+        }));
 
+        const whatsappUrl = getWhatsAppUrl(waMsg);
+        
+        // Use a slight delay to show success ritual, then redirect
         setTimeout(() => {
-          localStorage.setItem("bill", JSON.stringify({
-            customer, items: cart, total: totalAmount, paymentMethod, date: new Date().toLocaleString()
-          }));
+          window.location.href = whatsappUrl;
+        }, 1500);
+
+        // After some more time, navigate to bill if they come back
+        setTimeout(() => {
           navigate("/bill");
-        }, 2000);
+        }, 3000);
       } else {
         alert("SYNC ERROR: Could not record order in boutique database.");
         setOrderSuccess(false);
@@ -476,15 +484,33 @@ export default function Welcome({ cart, setCart, isCartOpen, setIsCartOpen, addT
       {/* SUPREME SUCCESS OVERLAY */}
       {orderSuccess && (
         <div className="supreme-success-overlay">
-          <div className="success-ritual">
-            <div className="success-icon-wrap">
-              <div className="pulse-order"></div>
-              <span>✓</span>
+            <div className="success-ritual">
+              <div className="success-icon-wrap">
+                <div className="pulse-order"></div>
+                <span>✓</span>
+              </div>
+              <h2>Order Processed</h2>
+              <p>Opening WhatsApp to confirm your boutique order...</p>
+              
+              <a 
+                href={getWhatsAppUrl(`🌸 *Boutique Order* 🌸\nName: ${customer.name}\nTotal: ₹${totalAmount}`)} 
+                className="manual-wa-btn"
+                style={{
+                  display: 'inline-block',
+                  marginTop: '20px',
+                  padding: '12px 25px',
+                  background: '#25D366',
+                  color: 'white',
+                  borderRadius: '50px',
+                  textDecoration: 'none',
+                  fontWeight: '700'
+                }}
+              >
+                SEND MANUALLY IF NOT OPENED
+              </a>
+              
+              <div className="ritual-progress-bar"><div className="progress-fill"></div></div>
             </div>
-            <h2>Ritual Finalized</h2>
-            <p>Our artisans are preparing your professional boutique invoice. You will be redirected shortly.</p>
-            <div className="ritual-progress-bar"><div className="progress-fill"></div></div>
-          </div>
         </div>
       )}
 
